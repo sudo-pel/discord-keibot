@@ -1,0 +1,25 @@
+{
+  "name": "keibot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@keyv/sqlite": "^2.0.2",
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0",
+    "keyv": "^4.0.3",
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0",
+    "nodemon": "^2.0.7",
+    "sequelize": "^6.6.2",
+    "shuffle-array": "^1.0.1",
+    "sqlite": "^4.0.21",
+    "sqlite3": "^5.0.2"
+  }
+}
