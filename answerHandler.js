@@ -48,9 +48,9 @@ module.exports = async function answer(author, mainChannel) {
                 user.balance += question.baseReward;
                 // streak bonus: +10% for first five days, then +7.5% for ten days, then +5%
                 var streakBonus;
-                if (user.streak < 6 && user.streak > 1) { streakBonus = 0.1 * question.baseReward * (user.streak - 1)}
-                else if (user.streak < 16) { streakBonus = (0.5 * question.baseReward) + (0.075 * (user.streak - 6) * question.baseReward)}
-                else { streakBonus = (0.5 * question.baseReward) + (0.75 * question.baseReward) + (0.05 * (user.streak - 16) * question.baseReward) } 
+                if (user.streak < 6 && user.streak > 0) { streakBonus = 0.1 * question.baseReward * (user.streak - 1)}
+                else if (user.streak < 16) { streakBonus = (0.1 * question.baseReward) + (0.075 * (user.streak - 6) * question.baseReward)}
+                else { streakBonus = (0.05 * question.baseReward) + (0.075 * question.baseReward) + (0.05 * (user.streak - 16) * question.baseReward) } 
                 streakBonus = Math.round(streakBonus);
                 user.balance += streakBonus;
 
