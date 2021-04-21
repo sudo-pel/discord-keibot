@@ -44,6 +44,7 @@ module.exports = async function answer(author, mainChannel) {
                 channel.send(`That's correct! You got ${question.baseReward}G.`);
                 user.questionsCorrect ++;
                 user.streak ++;
+                user.answeredToday = true;
                 //user.answeredToday = true; removed for testing purposes
                 user.balance += question.baseReward;
                 // streak bonus: +10% for first five days, then +7.5% for ten days, then +5%

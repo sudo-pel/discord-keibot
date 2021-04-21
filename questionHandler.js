@@ -16,6 +16,7 @@ const moment = require('moment');
 var currentQuestion = undefined;
 
 async function ask(channel) {
+    console.log("aaaa");
     // find random question (I don't think getting a question that hasn't been asked before is worth it)
     var question;
 

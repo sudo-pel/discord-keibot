@@ -31,11 +31,11 @@ client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.slice(0, 2) != '--') return;
 
-    /*
-    if (message.content.toLowerCase() == "--ping") {
-        ask(message.channel);
+    
+    if (message.content.toLowerCase() == "--dailyreset" && message.author.id == "151042614047670272") {
+        dailyReset();
     }
-    */
+    
 
     const arguments = message.content.toLowerCase().split(' ');
     const command = arguments[0].slice(2);
@@ -141,26 +141,23 @@ async function dailyReset() {
     if (test) return;
     test = true;
 
-    console.log("Called daily reset");
-
     // handle all player stuff
     const players = await playerdata.findAll();
     const updateStack = [];
 
-    players.forEach(player => {
+    players.forEach(
         async (player) => {
             if (!player.answeredToday) { player.streak = 0 }
-            answeredToday = false;
-            currentlyAnswering = undefined;
+            player.answeredToday = false;
+            player.currentlyAnswering = undefined;
             await player.save();
         }
-    })
+    )
 
 
     const date = moment().utcOffset(1);
 
     // ask new question in all servers
-    console.log("asking..");
     var servers = await serversettings.findAll();
     servers.forEach(async server => {
         // ask question
@@ -169,20 +166,22 @@ async function dailyReset() {
         const questionid = await ask(mainChannel);
 
         // save question to parameters
-        await parameters.create({
+        const newParam = await parameters.create({
             guild: server.id,
             date: date,
             qotdID: questionid,
             answered: "",
             channel: mainChannel.id
         });
+
+        await newParam.save();
         
     })
 
     test = false
 };
 
-cron.schedule("0 */1 * * * *", dailyReset);
+cron.schedule("0 0 9 */1 * *", dailyReset);
 
 client.once("ready", () => {
     console.log("Kei is ready for action.");
