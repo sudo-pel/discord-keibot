@@ -64,6 +64,10 @@ module.exports = (message, arguments) => {
               "fields": [
                 {
                   "name": "** **",
+                  "value": "To answer a question, input '--answer' in any channel. Just ensure that it's in the correct server. Kei will DM you, and you can respond with the answer. Just make sure that you give it in the exact format requested by the question."
+                },
+                {
+                  "name": "** **",
                   "value": "Most of the questions will have answers that are very easy to type, such as simple numbers or decimals."
                 },
                 {

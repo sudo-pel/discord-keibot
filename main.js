@@ -147,15 +147,15 @@ async function dailyReset() {
 
     players.forEach(
         async (player) => {
-            if (!player.answeredToday) { player.streak = 0 }
+            console.log(player);
+            if (!player.answeredToday) { player.streak = 0 };
             player.answeredToday = false;
             player.currentlyAnswering = undefined;
             await player.save();
         }
     )
 
-
-    const date = moment().utcOffset(1);
+    const date = moment().utcOffset(0);
 
     // ask new question in all servers
     var servers = await serversettings.findAll();
@@ -181,7 +181,7 @@ async function dailyReset() {
     test = false
 };
 
-cron.schedule("0 0 9 */1 * *", dailyReset);
+cron.schedule("0 0 7 */1 * *", dailyReset);
 
 client.once("ready", () => {
     console.log("Kei is ready for action.");

@@ -16,7 +16,6 @@ const moment = require('moment');
 var currentQuestion = undefined;
 
 async function ask(channel) {
-    console.log("aaaa");
     // find random question (I don't think getting a question that hasn't been asked before is worth it)
     var question;
 
@@ -29,6 +28,7 @@ async function ask(channel) {
     .then(q => { question = q.dataValues } )
     .catch(e => { channel.send(`Couldn't find a question for some reason.`) })
 
+    
     // set current to question
     var thisserversettings = await serversettings.findOne({
         where: {
@@ -46,7 +46,8 @@ async function ask(channel) {
     thisserversettings.save();
 
     // post question in designated channel
-    await channel.send(await formatQuestion(question, moment().utcOffset(1).format("dddd, MMMM Do YYYY")));
+    await channel.send(await formatQuestion(question, moment().format("dddd, MMMM Do YYYY")));
+    await channel.send("Not sure how to input your answer? Input '--help' in any channel for more information.");
     
     return question.id;
 }
